@@ -1,0 +1,18 @@
+<Project>
+    <PropertyGroup>
+        <_MDKNativeAssetsIdentifier Condition="$(RuntimeIdentifier.StartsWith('win')) and $(RuntimeIdentifier.EndsWith('x64'))">win-x64</_MDKNativeAssetsIdentifier>
+        <_MDKNativeAssetsIdentifier Condition="$(RuntimeIdentifier.StartsWith('win')) and $(RuntimeIdentifier.EndsWith('x86'))">win-x86</_MDKNativeAssetsIdentifier>
+        <_MDKNativeAssetsIdentifier Condition="$(RuntimeIdentifier.StartsWith('win')) and $(RuntimeIdentifier.EndsWith('arm64'))">win-arm64</_MDKNativeAssetsIdentifier>
+        <_MDKNativeAssetsIdentifier Condition="$(RuntimeIdentifier.StartsWith('linux')) and $(RuntimeIdentifier.EndsWith('x64'))">linux-arm64</_MDKNativeAssetsIdentifier>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="$(MSBuildThisFileDirectory)..\runtimes\win-x64\native\*.dll" Condition="'$(_MDKNativeAssetsIdentifier)' == 'win-x64'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
+        <Content Include="$(MSBuildThisFileDirectory)..\runtimes\linux-x64\native\*.so" Condition="'$(_MDKNativeAssetsIdentifier)' == 'linux-x64'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
+    </ItemGroup>
+</Project>
